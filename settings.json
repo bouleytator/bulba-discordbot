@@ -1,6 +1,6 @@
 {
-   "owner": "198384131925737481",
-   "admin": "199070594023555074",
-   "token": "MzMxMDI1ODQ2ODM4MDk5OTY4.DDpjXw.vqKeMM7_WtaOCuyVoPCIcE0chmU",
-   "prefix": "+"
+   "owner": "YOUR ID",
+   "admin": "YOUR ADMIN ID",
+   "token": "Bot Token",
+   "prefix": "!" // Your Bot Prefix, Default is !
 }
