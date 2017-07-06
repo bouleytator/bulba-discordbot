@@ -2,5 +2,8 @@
    "owner": "YOUR ID",
    "admin": "YOUR ADMIN ID",
    "token": "Bot Token",
-   "prefix": "!" // Default Prefix !
+   "prefix": "!"
 }
+
+
+// Default Bot Prefix is !
