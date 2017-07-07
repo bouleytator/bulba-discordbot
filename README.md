@@ -36,7 +36,13 @@ On the CMD for Linux, do `node discord-bot`.**
 
 ## Version  
 **Currently Running on Version**  
-**1.0.2**
+**1.0.3**
+
+
+### Upcoming Features
+**Here's a list of the Upcoming Features for Bulba  
+- Better Userinfo 
+- Adding Reasons for the Ban/Kick Command** 
 
 
 **Thanks for installing Bulba!**
