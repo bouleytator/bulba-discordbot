@@ -164,6 +164,7 @@ value: `${user.username}\'s Current Status is: __**${user.presence.status}**__`
       text: `Success! ${user.username} is Verified`
     }
   }
-})	}});
+})
+	}});
 
 client.login(config.token);
