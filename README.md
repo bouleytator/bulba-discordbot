@@ -40,8 +40,8 @@ On the CMD for Linux, do `node discord-bot`.**
 
 
 ### Upcoming Features
-**Here's a list of the Upcoming Features for Bulba  
-- Better Userinfo 
+**Here's a list of the Upcoming Features for Bulba  **
+**- Better Userinfo 
 - Adding Reasons for the Ban/Kick Command** 
 
 
