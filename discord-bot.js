@@ -165,6 +165,6 @@ value: `${user.username}\'s Current Status is: __**${user.presence.status}**__`
     }
   }
 })
-	}});
+}});
 
 client.login(config.token);
