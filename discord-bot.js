@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const fs = require("fs");
 const config = require("./settings.json");
 
 
@@ -44,11 +43,7 @@ m.channel.send(`**Pong! Took __${Math.round(client.ping)}__ ms to reply :smile:*
  } else
 if (m.content.startsWith(config.prefix + 'help')) {
 if (m.author.bot) return;
-m.channel.send(`${m.author.username}: A list of commands was sent in DM!\nDo \`\n${config.prefix}invite\`\ to invite me to your Server!`).then(()=> m.author.send(`**Help Commands: \n${config.prefix}kick** - Kicks a Specified User\n**${config.prefix}ban** - Bans a Specified User\n**${config.prefix}clear** - Clears the Amount of Messages. Maximum = 99\n**${config.prefix}say** - Bot says the thing you want it to say\n**${config.prefix}ping** - Pong!\n**${config.prefix}guilds** - Shows the Guild Name and Amount of Users on the Guild ${client.user} is in.\n**${config.prefix}myid** - Shows your ID\n**${config.prefix}meme** - Shows random Memes`));
-  } else
-if (m.content.startsWith(config.prefix + 'myid')) {
-if (m.author.bot) return
-m.channel.send(`${m.author} ** Sent your ID in DM!**`).then(()=> m.author.send(`**Hello! Here\'s your ID :smile:\n${m.author.id}**`));
+m.channel.send(`${m.author.username}: A list of commands was sent in DM!\nDo \`\n${config.prefix}invite\`\ to invite me to your Server!`).then(()=> m.author.send(`**\`\`\`\nThis Help Message Will have Different Categorys!\n\n- Utility:\n${config.prefix}help - Shows the Help Commands\n${config.prefix}ping - Pong!\n${config.prefix}guilds - Shows the Guilds ${client.user.username} is in!\n${config.prefix}meme - Shows Random Memes\n\n- Moderation:\n${config.prefix}clear - Clears the Specified Amount Of Messages\n${config.prefix}kick - Kicks a Specified User\n${config.prefix}ban - Bans a Specified User\n\n- Information:\n${config.prefix}userinfo - Shows the Information of a Specified User\n\nDo ${config.prefix}invite to invite ${client.user.username}!\n${client.user.username} was Coded in the Discord.js Library!\`\`\`\**\n\n **Our Discord Support Server\nhttps://discord.gg/wsPz5rq**`));
   } else
 if (m.content.startsWith(config.prefix + 'invite')) {
 m.channel.send(`**__${m.author.username}__ sent my *Invite*  in DM!**`).then(() => m.author.send(`**${m.author.username} here\'s my invite!\n ==> https://discordapp.com/oauth2/authorize?client_id=331025846838099968&scope=bot&permissions=1043472446**`));
@@ -122,7 +117,53 @@ if (m.author.id !== config.owner && m.author.id !== config.admin)
 return m.channel.send(`**Sorry but you\'re not the owner!**`);
 			m.channel.send(`**Success! Changed my Game Status to __${argsresult}__**`)
 		client.user.setGame(argsresult);
-}
+} else
+if (m.content.startsWith(config.prefix + 'userid')) {
+    var user = m.mentions.users.first();
+if (m.author.bot) return
+if (!user)
+return m.channel.send(`**Please Specify a User!**`);
+m.channel.send(`**Hello ${m.author.username}, i see that you wanted ${user}\'s ID? Here it is\n__${user.id}__**`)
+  }
 });
+
+
+client.on('message', message => {
+if (message.content.startsWith(config.prefix + 'userinfo')) {	
+var user = message.mentions.users.first();
+if (!user)
+return message.channel.send(`**:warning: ${message.author}, You musts specify a user or this won't work!**`);
+message.channel.send({embed: {
+    color: 3447003,
+    author: {
+      name: `${user.username}\'s Information`,
+      icon_url: `${user.avatarURL}`
+    },
+    title: `${user.username}\'s Avatar Link`,
+    description: `Here\'s ${user.username}\'s Avatar Link. => [Click Me!](${user.avatarURL})`,
+    fields: [{
+        name: `${user.username}\'s ID`,
+        value: `__**${user.id}**__ is his ID!`
+},
+{
+        name: `${user.username}\'s Discriminator Name` ,
+        value: `${user.tag} is ${user.username}\'s Discriminator Name!`
+       },
+{
+name: `Time Creation for ${user.username}`,
+value: `Joined Discord at\n\n${user.createdAt}`
+},
+{
+name: `Status`,
+value: `${user.username}\'s Current Status is: __**${user.presence.status}**__`
+}
+    ],
+    timestamp: new Date(),
+    footer: {
+      icon_url: `${user.avatarURL}`,
+      text: `Success! ${user.username} is Verified`
+    }
+  }
+})	}});
 
 client.login(config.token);
