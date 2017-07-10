@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
+const { RichEmbed } = require('discord.js');
 const client = new Discord.Client();
+const fs = require("fs");
 const config = require("./settings.json");
 
 
@@ -11,26 +13,30 @@ client.on('message', m =>{
 	let args = m.content.split(' ').slice(1);
 
 if (m.content.startsWith(config.prefix + 'kick')) {
-     if(m.author.bot) return;
-    var user = m.mentions.users.first();
-	var member = m.guild.member(user);
-	  let role = m.member.hasPermission('KICK_MEMBERS');
-		if (!m.member.hasPermission('KICK_MEMBERS') && m.author.id !== config.owner)
-		return m.channel.send("**You don't have the permission Kick Members ! :no_entry_sign:**");
-	       if (!user)
-		return m.channel.send('**Please Specify a user to Kick!**');
-	       m.channel.send(`**${user.username} got kicked by ${m.author}!** :O `)
+var reason = args.splice(1).join(' ');
+var user = m.mentions.users.first();
+var member = m.guild.member(user);
+if (!m.member.hasPermission('KICK_MEMBERS') && m.author.id !== config.owner)
+return m.channel.send(`**You\'re missing the Permission Kick Members! :no_entry_sign:**`);
+if(!user)
+return m.channel.send(`**Please Specify a User to Kick!**`);
+if (!reason)
+return m.channel.send(`**Please give a Reason to Kick __${user.username}__!**`)
+m.channel.send(`**Success!\n${m.author} kicked \`\n${user.username}\`\ because of __${reason}__**`)
 member.kick()
   } else
 if (m.content.startsWith(config.prefix + 'ban')) {
 if (m.author.bot) return;
     var user = m.mentions.users.first();
+var reason = args.splice(1).join(' ');
 	var member = m.guild.member(user);
 if (!m.member.hasPermission('BAN_MEMBERS') && m.author.id !== config.owner)
-return m.channel.send("**You don't have the permission Ban Members ! :no_entry_sign:**");
+return m.channel.send("**You\'re missing the Permission Ban Members! :no_entry_sign:**");
 if (!user)
 return m.channel.send(`**Please Specify a user to Ban!**`);
-m.channel.send(`**${user.username} got banned by ${m.author}!** :O `)
+if (!reason)
+return m.channel.send(`**Please give a Reason to Ban __${user.username}__!**`)
+m.channel.send(`**Success!\n${m.author} banned \`\n${user.username}\`\ because of __${reason}__**`)
 member.ban()
  } else
 if (m.content.startsWith(config.prefix + 'shutdown')) {
@@ -43,7 +49,7 @@ m.channel.send(`**Pong! Took __${Math.round(client.ping)}__ ms to reply :smile:*
  } else
 if (m.content.startsWith(config.prefix + 'help')) {
 if (m.author.bot) return;
-m.channel.send(`${m.author.username}: A list of commands was sent in DM!\nDo \`\n${config.prefix}invite\`\ to invite me to your Server!`).then(()=> m.author.send(`**\`\`\`\nThis Help Message Will have Different Categorys!\n\n- Utility:\n${config.prefix}help - Shows the Help Commands\n${config.prefix}ping - Pong!\n${config.prefix}guilds - Shows the Guilds ${client.user.username} is in!\n${config.prefix}meme - Shows Random Memes\n\n- Moderation:\n${config.prefix}clear - Clears the Specified Amount Of Messages\n${config.prefix}kick - Kicks a Specified User\n${config.prefix}ban - Bans a Specified User\n\n- Information:\n${config.prefix}userinfo - Shows the Information of a Specified User\n\nDo ${config.prefix}invite to invite ${client.user.username}!\n${client.user.username} was Coded in the Discord.js Library!\`\`\`\**\n\n **Our Discord Support Server\nhttps://discord.gg/wsPz5rq**`));
+m.channel.send(`${m.author.username}: A list of commands was sent in DM!\nDo \`\n${config.prefix}invite\`\ to invite me to your Server!`).then(()=> m.author.send(`**\`\`\`\nThis Help Message Will have Different Categorys!\n\n- Utility:\n${config.prefix}help - Shows the Help Commands\n${config.prefix}ping - Pong!\n${config.prefix}guilds - Shows the Guilds ${client.user.username} is in!\n${config.prefix}meme - Shows Random Memes\n${config.prefix}say - Says something you Say\n${config.prefix}embed - Embeds the Word/Sentence you say\n\n- Moderation:\n${config.prefix}clear - Clears the Specified Amount Of Messages\n${config.prefix}kick - Kicks a Specified User\n${config.prefix}ban - Bans a Specified User\n\n- Information:\n${config.prefix}userinfo - Shows the Information of a Specified User\n${config.prefix}serverinfo - Shows the Server Info\n\nDo ${config.prefix}invite to invite ${client.user.username}!\n${client.user.username} was Coded in the Discord.js Library!\`\`\`\**\n\n **Our Discord Support Server\nhttps://discord.gg/wsPz5rq**`));
   } else
 if (m.content.startsWith(config.prefix + 'invite')) {
 m.channel.send(`**__${m.author.username}__ sent my *Invite*  in DM!**`).then(() => m.author.send(`**${m.author.username} here\'s my invite!\n ==> https://discordapp.com/oauth2/authorize?client_id=331025846838099968&scope=bot&permissions=1043472446**`));
@@ -57,7 +63,7 @@ return m.channel.send(`**${m.author} You lack the permissions \'\ADMINISTRATOR\'
             
 } else
 if (m.content.startsWith(config.prefix + 'guilds')) {
-m.channel.send(`**Currently in ${client.guilds.size} Guilds, here are the Guild Names!!** \n`+ client.guilds.map(g=>`**\`\`\`xl\n\nGuild Name: ${g.name} , ${g.memberCount} Members\n\n\`\`\`**`).join('\n'))
+m.channel.send(`**Currently in ${client.guilds.size} Guilds, here are the Guild Names!!** \n`+ client.guilds.map(g=>`**Guild Name: __${g.name}__ , \`\n${g.memberCount}\`\ Members**`).join('\n'))
  }
 });
 client.on('message', message => {
@@ -111,6 +117,7 @@ client.on('message', m => {
   let args = m.content.split(' ').slice(1);
 	var argsresult = args.join(' ');
   var result = args.join(' ');
+var stream = args.join(' ');
 
 if (m.content.startsWith(config.prefix + 'setgame')) {
 if (m.author.id !== config.owner && m.author.id !== config.admin)
@@ -124,47 +131,163 @@ if (m.author.bot) return
 if (!user)
 return m.channel.send(`**Please Specify a User!**`);
 m.channel.send(`**Hello ${m.author.username}, i see that you wanted ${user}\'s ID? Here it is\n__${user.id}__**`)
+  } else
+if(m.content.startsWith(config.prefix + 'setstream')) {
+if (m.author.id !== config.owner)
+return m.channel.send(`**Sorry but you\'re not the owner!**`);
+m.channel.send(`**Changed my Game to Stream and now, it\'s displaying __${stream}__**`)
+client.user.setGame(stream, 'https://twitch.tv/bouleytator')
   }
 });
 
 
 client.on('message', message => {
-if (message.content.startsWith(config.prefix + 'userinfo')) {	
-var user = message.mentions.users.first();
-if (!user)
-return message.channel.send(`**:warning: ${message.author}, You musts specify a user or this won't work!**`);
+if (message.content.startsWith(config.prefix + 'userinfo')) {
+
+  let user = message.mentions.users.first();
+  if (!user) {
+    user = message.author;
+  }
+  let nick = message.guild.members.get(user.id).nickname;
+  if (!nick) {
+    nick = 'No Nicknames';
+  }
+  let status = user.presence.status;
+  if (status === 'online') {
+    status = 'Online';
+  }
+  else if (status === 'idle') {
+    status = 'Idle';
+  }
+  else if (status === 'dnd') {
+    status = 'Do Not Disturb';
+  }
+  else {
+    status = 'Invisible';
+  }
+  let isStream = 'Current Game';
+  if (user.presence.game && user.presence.game.streaming) {
+    isStream = 'Current Stream';
+  }
+  let game;
+  if (user.presence.game === null) {
+    game = 'No Game Displayed';
+  }
+  else if (user.presence.game.streaming) {
+    game = `[${user.presence.game.name}](${user.presence.game.url})`;
+  }
+  else {
+    game = user.presence.game.name;
+  }
+  let roles = message.guild.members.get(user.id).roles.map(r => r.name).slice(1).join('\n');
+  if (roles.length === 0) roles = '-';
+
+  message.channel.send({
+    embed: {
+      color: 000000,
+      title: 'User Info',
+      fields: [
+        {
+          name: 'Name',
+          value: user.tag,
+          inline: true
+        },
+        {
+          name: 'ID',
+          value: user.id,
+          inline: true
+        },
+        {
+          name: 'Nickname',
+          value: nick,
+          inline: true
+        },
+        {
+          name: 'Roles',
+          value: roles,
+          inline: true
+        },
+        {
+          name: 'Joined Server',
+          value: message.guild.members.get(user.id).joinedAt.toUTCString(),
+          inline: true
+        },
+        {
+          name: 'Joined Discord',
+          value: user.createdAt.toUTCString(),
+          inline: true
+        },
+        {
+          name: 'Status',
+          value: status,
+          inline: true
+        },
+        {
+          name: isStream,
+          value: game,
+          inline: true
+        }
+      ],
+      thumbnail: {
+        url: user.displayAvatarURL
+      }
+  }
+  });
+}});
+
+
+client.on("message", message => {
+        var args = message.content.split(/[ ]+/);
+
+if(message.content.startsWith(config.prefix + 'embed')) {
+     if (!message.member.hasPermission("MANAGE_MESSAGES") && message.author.id !== config.owner) return message.reply('**You Are Missing The Permissions Manage Messages! :no_entry_sign:**');
+    if (message.author == client.user) return;
+message.delete();
+
+const embed = new RichEmbed();
+
+embed.setColor('RANDOM');
+embed.setDescription(args.join(" ").substring(6));
+
+message.channel.send({ embed });
+} else
+if (message.content.startsWith(config.prefix + 'serverinfo')) {
 message.channel.send({embed: {
     color: 3447003,
     author: {
-      name: `${user.username}\'s Information`,
-      icon_url: `${user.avatarURL}`
+      name: `${message.guild.name}`,
+      icon_url: message.guild.iconURL
     },
-    title: `${user.username}\'s Avatar Link`,
-    description: `Here\'s ${user.username}\'s Avatar Link. => [Click Me!](${user.avatarURL})`,
-    fields: [{
-        name: `${user.username}\'s ID`,
-        value: `__**${user.id}**__ is his ID!`
+    "thumbnail": {
+      "url": `${message.guild.iconURL}`
 },
-{
-        name: `${user.username}\'s Discriminator Name` ,
-        value: `${user.tag} is ${user.username}\'s Discriminator Name!`
-       },
-{
-name: `Time Creation for ${user.username}`,
-value: `Joined Discord at\n\n${user.createdAt}`
-},
-{
-name: `Status`,
-value: `${user.username}\'s Current Status is: __**${user.presence.status}**__`
-}
+fields: [{
+        name: "Default Guild Channel",
+        value: `${message.guild.defaultChannel}`
+      },
+      {
+        name: "Guild Owner",
+        value: `${message.guild.owner}`
+      },
+      {
+        name: "Total Amount of Members",
+        value: `${message.guild.memberCount} Members in Total!`
+      },
+      {
+ 							name: "Date of the Guild was Created",
+								value: `${message.guild.createdAt}`
+ 					},
+						{
+								name: "Server Region",
+								value: `${message.guild.region}`
+						}
     ],
     timestamp: new Date(),
     footer: {
-      icon_url: `${user.avatarURL}`,
-      text: `Success! ${user.username} is Verified`
+      icon_url: client.user.avatarURL,
+      text: `${message.guild.name} is a Verified Guild By ${client.user.username}!`
     }
   }
 })
 }});
-
 client.login(config.token);
