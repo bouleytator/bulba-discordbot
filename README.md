@@ -42,7 +42,7 @@ What is Bulba?
 ```js 
 client.on('message', bulba -> {
   if(bulba.content.startsWith(config.prefix + 'hello')) {
-    bulba.channel.send(`Hi ${message.author.tag}!`)
+    bulba.channel.send(`Hi ${bulba.author.tag}!`)
    }
  });
 ``` 
