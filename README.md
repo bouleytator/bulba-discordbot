@@ -34,3 +34,17 @@ What is Bulba?
 ## Version
 **2.0**
 
+
+# Making your Own Command
+
+**It's really ezpz**  
+**If you want, copy these.**  
+**```js 
+client.on('message', bulba -> {
+  if(message.content.startsWith(config.prefix + 'hello')) {
+    message.channel.send(`Hi ${message.author.tag}!`)
+   }
+ });
+**``` 
+
+**It's really easy!**
