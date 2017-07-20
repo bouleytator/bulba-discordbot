@@ -25,7 +25,10 @@ What is Bulba?
 **Requirements:** 
 **NodeJS 8+** 
 **Windows 7 and Above** 
-**Now, install the file and open it, now that you've opened it. There's two .BAT Files. Install the dependencies by clicking the `installdep.bat` file and once you've done that, run it with `bulbago.bat`**
+**Now, install the file and open it, now that you've opened it. There's two .BAT Files. Install the dependencies by clicking the `installdep.bat` file and once you've done that, run it with `bulbago.bat`** 
+
+***WARNING!***  
+**If your CMD Auto Closes, it means node is not install and the dependencies are missing!
 
 ## Linux
 **Err.. Not Available!**  
