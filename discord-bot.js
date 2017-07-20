@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const { RichEmbed } = require('discord.js');
+const embed = new Discord.RichEmbed()
 const client = new Discord.Client();
 const fs = require("fs");
 const config = require("./settings.json");
@@ -49,7 +50,7 @@ m.channel.send(`**Pong! Took __${Math.round(client.ping)}__ ms to reply :smile:*
  } else
 if (m.content.startsWith(config.prefix + 'help')) {
 if (m.author.bot) return;
-m.channel.send(`${m.author.username}: A list of commands was sent in DM!\nDo \`\n${config.prefix}invite\`\ to invite me to your Server!`).then(()=> m.author.send(`**\`\`\`\nThis Help Message Will have Different Categorys!\n\n- Utility:\n${config.prefix}help - Shows the Help Commands\n${config.prefix}ping - Pong!\n${config.prefix}guilds - Shows the Guilds ${client.user.username} is in!\n${config.prefix}meme - Shows Random Memes\n${config.prefix}say - Says something you Say\n${config.prefix}embed - Embeds the Word/Sentence you say\n\n- Moderation:\n${config.prefix}clear - Clears the Specified Amount Of Messages\n${config.prefix}kick - Kicks a Specified User\n${config.prefix}ban - Bans a Specified User\n\n- Information:\n${config.prefix}userinfo - Shows the Information of a Specified User\n${config.prefix}serverinfo - Shows the Server Info\n\nDo ${config.prefix}invite to invite ${client.user.username}!\n${client.user.username} was Coded in the Discord.js Library!\`\`\`\**\n\n **Our Discord Support Server\nhttps://discord.gg/wsPz5rq**`));
+m.channel.send(`${m.author.username}: A list of commands was sent in DM!\nDo \`\n${config.prefix}invite\`\ to invite me to your Server!`).then(()=> m.author.send(`**\`\`\`\nThis Help Message Will have Different Categorys!\n\n- Utility:\n${config.prefix}help - Shows the Help Commands\n${config.prefix}ping - Pong!\n${config.prefix}meme - Shows Random Memes\n${config.prefix}say - Says something you Say\n${config.prefix}embed - Embeds the Word/Sentence you say\n${config.prefix}roll - Rolls a dice!\n${config.prefix}8ball - Ask 8ball a question!\n\n- Moderation:\n${config.prefix}clear - Clears the Specified Amount Of Messages\n${config.prefix}kick - Kicks a Specified User\n${config.prefix}ban - Bans a Specified User\n\n- Information:\n${config.prefix}userinfo - Shows the Information of a Specified User\n${config.prefix}serverinfo - Shows the Server Info\n\nDo ${config.prefix}invite to invite ${client.user.username}!\n${client.user.username} was Coded in the Discord.js Library!\`\`\`\**\n\n **Our Discord Support Server\nhttps://discord.gg/wsPz5rq**`));
   } else
 if (m.content.startsWith(config.prefix + 'invite')) {
 m.channel.send(`**__${m.author.username}__ sent my *Invite*  in DM!**`).then(() => m.author.send(`**${m.author.username} here\'s my invite!\n ==> https://discordapp.com/oauth2/authorize?client_id=331025846838099968&scope=bot&permissions=1043472446**`));
@@ -63,6 +64,7 @@ return m.channel.send(`**${m.author} You lack the permissions \'\ADMINISTRATOR\'
             
 } else
 if (m.content.startsWith(config.prefix + 'guilds')) {
+if(m.author.id !== config.owner) return;
 m.channel.send(`**Currently in ${client.guilds.size} Guilds, here are the Guild Names!!** \n`+ client.guilds.map(g=>`**Guild Name: __${g.name}__ , \`\n${g.memberCount}\`\ Members**`).join('\n'))
  }
 });
@@ -137,7 +139,36 @@ if (m.author.id !== config.owner)
 return m.channel.send(`**Sorry but you\'re not the owner!**`);
 m.channel.send(`**Changed my Game to Stream and now, it\'s displaying __${stream}__**`)
 client.user.setGame(stream, 'https://twitch.tv/bouleytator')
-  }
+  } else
+  if (m.content.startsWith(config.prefix +'roll')) {
+  		var result = Math.floor((Math.random() * 100) + 1);
+  		m.channel.send(`**${m.author} you rolled :game_die: ${result}! :game_die:**`);
+  } else
+    if (m.content.startsWith(config.prefix + '8ball')) {
+    	var sayings = ["It is certain",
+										"It is decidedly so",
+										"Without a doubt",
+										"Yes, definitely",
+										"You may rely on it",
+										"As I see it, yes",
+										"Most likely",
+										"Outlook good",
+										"Yes",
+										"Signs point to yes",
+										"Reply hazy try again",
+										"Ask again later",
+										"Better not tell you now",
+										"Cannot predict now",
+										"Concentrate and ask again",
+										"Don't count on it",
+										"My reply is no",
+										"My sources say no",
+										"Outlook not so good",
+										"Very doubtful"];
+
+			var result = Math.floor((Math.random() * sayings.length) + 0);
+			m.channel.send(sayings[result]);
+    }
 });
 
 
@@ -290,4 +321,51 @@ fields: [{
   }
 })
 }});
+
+let lonk = "none"
+
+client.on('message', message => {
+    if (message.content.startsWith(config.prefix + "bump")) {
+        message.channel.sendMessage(`**Successfully Bumped __${message.guild.name}__**`)
+        let bumped = client.channels.get('335779393462861825')
+        lonk = message.channel.createInvite()
+        var resolvedProm = Promise.resolve(lonk);
+        var thenProm = resolvedProm.then(function (value) {
+            console.log("" + value);
+
+bumped.send({embed: {
+    color: 0000000,
+    author: {
+      name: message.author.username,
+      icon_url: message.author.avatarURL
+},
+    "thumbnail": {
+      "url": `${message.guild.iconURL}`
+    },
+    fields: [{
+        name: `__${message.guild.name}__\'s Server Invite`,
+        value: `**Invite: ${value}**`
+      },
+      {
+        name: "Member Count",
+        value: `${message.guild.memberCount} Members in Total!`
+      },
+      {
+        name: "Server Owner",
+        value: `${message.guild.owner}`
+      }
+    ],
+    timestamp: new Date(),
+    footer: {
+      icon_url: message.guild.avatarURL,
+      text: `Join ${message.guild.name} today!`
+    }
+  }
+});
+	
+});
+    }
+});
+
+
 client.login(config.token);
