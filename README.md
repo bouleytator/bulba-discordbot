@@ -5,6 +5,7 @@
     </p>
   <p>
   <br />
+**Join our Chat Today!**
 <a href="https://discord.gg/wsPz5rq"><img src="http://i.imgur.com/Nz5u2f2.jpg" alt="discord.js" /></a>
   </p>
 </div>
