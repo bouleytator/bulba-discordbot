@@ -41,8 +41,8 @@ What is Bulba?
 **If you want, copy these.**  
 ```js 
 client.on('message', bulba -> {
-  if(message.content.startsWith(config.prefix + 'hello')) {
-    message.channel.send(`Hi ${message.author.tag}!`)
+  if(bulba.content.startsWith(config.prefix + 'hello')) {
+    bulba.channel.send(`Hi ${message.author.tag}!`)
    }
  });
 ``` 
