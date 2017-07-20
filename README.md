@@ -11,7 +11,7 @@ What is Bulba?
 **Bulba is a Powerful Discord Bot coded in the [Discord.js](https://discord.js.org) Library** 
 **This bot has many features to show! But for now, we're not doing many.**  
 **Join our Discord Support Server TODAY!!** 
-    <a href="https://discord.gg/wsPz5rq"><img src="http://i.imgur.com/Nz5u2f2.jpg" alt="discord.js" /></a>
+<a href="https://discord.gg/wsPz5rq"><img src="http://i.imgur.com/Nz5u2f2.jpg" alt="discord.js" /></a>
 
 
 ## Installation
