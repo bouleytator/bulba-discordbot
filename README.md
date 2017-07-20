@@ -5,11 +5,12 @@
   </p>
 </div>
 
-# Bulba Discord Bot
+# About
 
-**Hello! Welcome to Bulba's Official and Public Release.**  
-User: Uhm, what can i find here exactly?  
-Admin: Oh! Here you can find/use **Bulba** for free.   
+What is Bulba?  
+**Bulba is a Powerful Discord Bot coded in the [Discord.js](https://discord.js.org) Library** 
+**This bot has many features to show! But for now, we're not doing many.**  
+<img src="http://imgur.com/Nz5u2f2" alt="Join the Official Discord.js Server"></a></p>
 
 
 ## Installation
