@@ -46,7 +46,7 @@ What is Bulba?
 **It's really ezpz**  
 **If you want, copy these.**  
 ```js 
-client.on('message', bulba -> {
+client.on('message', bulba => {
   if(bulba.content.startsWith(config.prefix + 'hello')) {
     bulba.channel.send(`Hi ${bulba.author.tag}!`)
    }
