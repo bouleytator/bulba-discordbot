@@ -4,8 +4,9 @@
     <a href="https://discord.js.org"><img src="http://orig02.deviantart.net/a46c/f/2015/008/a/2/bulbasaur_banner_by_sakuraalexia-d8d2uht.png" width="546" alt="discord.js" /></a>
     </p>
   <p>
-  <br />
-**Join our Chat Today!**
+  <b>Join our Chat Today!</b>
+  </p>
+<p>
 <a href="https://discord.gg/wsPz5rq"><img src="http://i.imgur.com/Nz5u2f2.jpg" alt="discord.js" /></a>
   </p>
 </div>
