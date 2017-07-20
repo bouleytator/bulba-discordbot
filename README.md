@@ -2,6 +2,7 @@
   <br />
   <p>
     <a href="https://discord.js.org"><img src="http://orig02.deviantart.net/a46c/f/2015/008/a/2/bulbasaur_banner_by_sakuraalexia-d8d2uht.png" width="546" alt="discord.js" /></a>
+<a href="https://discord.gg/wsPz5rq"><img src="http://i.imgur.com/Nz5u2f2.jpg" alt="discord.js" /></a>
   </p>
 </div>
 
@@ -10,8 +11,6 @@
 What is Bulba?  
 **Bulba is a Powerful Discord Bot coded in the [Discord.js](https://discord.js.org) Library** 
 **This bot has many features to show! But for now, we're not doing many.**  
-**Join our Discord Support Server TODAY!!** 
-<a href="https://discord.gg/wsPz5rq"><img src="http://i.imgur.com/Nz5u2f2.jpg" alt="discord.js" /></a>
 
 
 ## Installation
