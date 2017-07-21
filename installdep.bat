@@ -1,4 +1,5 @@
 @echo off
-loop
+color 2
+:loop
 npm install discord.js --save
-pause >nul
+goto loop
